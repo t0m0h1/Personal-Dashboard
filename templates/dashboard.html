@@ -1,13 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <h1>My Dashboard</h1>
-    <div id="data-table"></div>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
-</body>
-</html>
+{% extends 'layout.html' %}
+{% block content %}
+<h1>Dashboard Overview</h1>
+
+<h2>Tasks</h2>
+<p>{{ tasks|length }} tasks</p>
+
+<h2>Latest Health Entry</h2>
+{% if health %}
+<ul>
+    <li>Water: {{ health[2] }} glasses</li>
+    <li>Sleep: {{ health[3] }} hrs</li>
+    <li>Steps: {{ health[4] }}</li>
+    <li>Exercise: {{ health[5] }}</li>
+</ul>
+{% else %}
+<p>No health data yet.</p>
+{% endif %}
+
+<h2>Latest Mood</h2>
+{% if mood %}
+<p>Mood: {{ mood[2] }}<br>Note: {{ mood[3] }}</p>
+{% else %}
+<p>No mood data yet.</p>
+{% endif %}
+
+<h2>Gratitude</h2>
+{% if gratitude %}
+<ul>
+    <li>{{ gratitude[2] }}</li>
+    <li>{{ gratitude[3] }}</li>
+    <li>{{ gratitude[4] }}</li>
+</ul>
+{% else %}
+<p>No gratitude entry yet.</p>
+{% endif %}
+{% endblock %}
